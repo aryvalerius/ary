@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Girl ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:linear-gradient(135deg,#FFA6C9,#F19CBB);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.container{
+    width:320px;
+    height:500px;
+    position:relative;
+}
+
+.card{
+    width:100%;
+    height:100%;
+    position:absolute;
+    border-radius:25px;
+    padding:30px;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    transition:0.5s;
+    cursor:grab;
+    user-select:none;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.card h1{
+    margin-bottom:20px;
+    font-size:30px;
+}
+
+.card p{
+    font-size:18px;
+    line-height:1.5;
+}
+
+.card:nth-child(1){
+    background:#ff758f;
+    z-index:5;
+}
+
+.card:nth-child(2){
+    background:#fCA3B7;
+    transform:scale(0.95) translateY(10px);
+    z-index:4;
+}
+
+.card:nth-child(3){
+    background:#FBAED2;
+    transform:scale(0.9) translateY(20px);
+    z-index:3;
+}
+
+.swipe{
+    position:absolute;
+    bottom:20px;
+    font-size:14px;
+    opacity:0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+        <h1>🩷 Hai Kamu canna bocil</h1>
+        <p>
+            makasih ya udah hadir <br>
+            di hidup aku 😭
+        </p>
+        <div class="swipe">geser kartu 👉</div>
+    </div>
+
+    <div class="card">
+        <h1>🌸 Tau gak?</h1>
+        <p>
+            tiap ngobrol sama kamu <br>
+            rasanya hari jelek langsung ilang.
+        </p>
+    </div>
+
+    <div class="card">
+        <h1>💌 Last Card</h1>
+        <p>
+            jangan pergi ya cil... <br><br>
+            aku udah nyaman banget sama kamu ❤️
+        </p>
+    </div>
+
+</div>
+
+<script>
+const cards = document.querySelectorAll(".card");
+
+cards.forEach((card) => {
+
+let startX = 0;
+
+card.addEventListener("touchstart", (e)=>{
+    startX = e.touches[0].clientX;
+});
+
+card.addEventListener("touchmove", (e)=>{
+    let moveX = e.touches[0].clientX - startX;
+
+    card.style.transform =
+    `translateX(${moveX}px) rotate(${moveX/10}deg)`;
+});
+
+card.addEventListener("touchend", (e)=>{
+
+    let moveX = e.changedTouches[0].clientX - startX;
+
+    if(moveX > 100 || moveX < -100){
+
+        card.style.transform =
+        `translateX(${moveX > 0 ? 500 : -500}px)
+        rotate(${moveX/10}deg)`;
+
+        card.style.opacity = "0";
+
+    }else{
+        card.style.transform = "";
+    }
+
+});
+
+});
+</script>
+
+</body>
+</html>
